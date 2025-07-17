@@ -1,4 +1,4 @@
-import { mongoClient } from '../lib/mongo.js';
+import { mongoClient } from '../lib/mongoClient.js';
 import { ObjectId } from 'mongodb';
 
 export async function createPlayer(playerData) {
@@ -11,6 +11,6 @@ export async function createPlayer(playerData) {
 export async function deletePlayer(playerId) {
     const db = mongoClient.db("myDB");
     const collection = db.collection('players');
-    const result = await collection.deleteOne({ _id: new ObjectId(playerId) });
+    const result = await collection.deleteOne({ _id: new ObjectId(String(playerId)) });
     return result.deletedCount === 1;
 }
